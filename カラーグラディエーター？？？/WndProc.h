@@ -160,9 +160,7 @@ class GradationProc :public Window::EventHandler {
 			}
 				break;
 			case WM_PAINT: {
-				PAINTSTRUCT ps;
-				HDC hDC = BeginPaint(hWnd, &ps);
-
+							   				 
 				std::size_t RD = std::get<0>(Last) - std::get<0>(First);
 				std::size_t GD = std::get<1>(Last) - std::get<1>(First);
 				std::size_t BD = std::get<2>(Last) - std::get<2>(First);
@@ -178,7 +176,10 @@ class GradationProc :public Window::EventHandler {
 				GetClientRect(hWnd, &crt);
 				std::size_t CW = crt.right - crt.left;
 				std::size_t CH = crt.bottom - crt.top;
-				
+
+				PAINTSTRUCT ps;
+				HDC hDC = BeginPaint(hWnd, &ps);
+
 				Rectangle(hDC, 16, 16, CW-16, CH-(GH+32));
 				double P = (CW - (16.0*2)) / Sep;
 				for (std::size_t i = 0; i < Sep; i++) {
